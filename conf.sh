@@ -7,7 +7,7 @@ FIRSTCRLSERIAL="01"
 # Number of bytes for randfile
 RANDBYTES="16384"
 # Deafult key size (in bit)
-KEYSIZE="1024"
+KEYSIZE="4096"
 # Deafult number of days for self signed certs
 SELFSIGNEDDAYS=3650
 # Number of times a key should be overridden
