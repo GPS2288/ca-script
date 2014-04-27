@@ -290,7 +290,7 @@ ssl_sign_certificate()
         # extension will be used (user certificate)
         extension=""
 #        CSRMENU=("User certificate" "Server certificate" "Sub CA certificate" "Proxy certificate")
-        CSRMENU=("User certificate" "Server certificate" "Sub CA certificate")
+        CSRMENU=("User certificate" "Server certificate" "Sub CA certificate" "OpenVPN client certificate")
         PS3="Select type of certificate: "
         # get type of certificate 
         select opt in "${CSRMENU[@]}"
@@ -308,7 +308,11 @@ ssl_sign_certificate()
                     extension="subca_cert"
                     break
                     ;;
-#                4)  # Proxy certificate
+                4)  # OpenVPN client certificate
+                    extension="openvpn_client_cert"
+                    break
+                    ;;
+#                5)  # Proxy certificate
 #                    extension="proxy_cert"
 #                    break
 #                    ;;

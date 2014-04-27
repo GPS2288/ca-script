@@ -105,6 +105,7 @@ countryName_max         = 2
 stateOrProvinceName     = State or Province Name (full name)
 stateOrProvinceName_default = Some-State
 localityName            = Locality Name (eg, city)
+localityName_default    = Some-Town
 0.organizationName      = Organization Name (eg, company)
 0.organizationName_default  = Example Organisation      # CHANGE THIS
 organizationalUnitName  = Organizational Unit Name (eg, section)
@@ -154,12 +155,12 @@ crlDistributionPoints   = URI:http://crl1.example.com/my.crl # CHANGE THIS
 ####################################################################
 [ user_cert ]
 basicConstraints        = CA:FALSE
-# Feel free to add "dataEncipherment" or "keysAgreement"
-keyUsage                = nonRepudiation, digitalSignature, keyEncipherment
+# Feel free to add "dataEncipherment" or "keyAgreement"
+keyUsage                = digitalSignature, keyEncipherment
+extendedKeyUsage        = clientAuth, emailProtection, codeSigning
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid,issuer
 subjectAltName          = email:copy
-extendedKeyUsage        = clientAuth, emailProtection, codeSigning
 # URI of the CA certificate 
 authorityInfoAccess     = caIssuers;URI:http://my.ca/ca.html # CHANGE THIS
 # URI of the CRL 
@@ -168,12 +169,25 @@ crlDistributionPoints   = URI:http://crl1.example.com/my.crl # CHANGE THIS
 ####################################################################
 [ server_cert ]
 basicConstraints        = CA:FALSE
-keyUsage                = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+keyUsage                = digitalSignature, keyEncipherment
 extendedKeyUsage        = serverAuth
 # add subject Altname
 # IMPORTANT: You have to set the environment variable "ALTNAME", e.g.
 # export ALTNAME="DNS:www.example.com, DNS:www2.example.com"
 subjectAltName          = $ENV::ALTNAME
+# URI of the CA certificate 
+authorityInfoAccess     = caIssuers;URI:http://my.ca/ca.html # CHANGE THIS
+# URI of the CRL 
+crlDistributionPoints   = URI:http://crl1.example.com/my.crl # CHANGE THIS
+
+####################################################################
+[ openvpn_client_cert ]
+basicConstraints        = CA:FALSE
+keyUsage                = digitalSignature, keyAgreement
+extendedKeyUsage        = clientAuth
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid,issuer
+subjectAltName          = email:copy
 # URI of the CA certificate 
 authorityInfoAccess     = caIssuers;URI:http://my.ca/ca.html # CHANGE THIS
 # URI of the CRL 
